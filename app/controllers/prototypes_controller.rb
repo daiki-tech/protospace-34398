@@ -20,6 +20,9 @@ before_action :set_prototype, except: [:index, :new, :create]
   end
 
   def edit
+    @prototype = Prototype.find(params[:id]) 
+    redirect_to root_path unless current_user == @prototype.user
+
   end
 
   def update
@@ -54,8 +57,6 @@ private
     @prototype = Prototype.find(params[:id])
   end
 
-  def contributor_confirmation
-    redirect_to root_path unless current_user == @prototype.user
-  end
+
 
 end
